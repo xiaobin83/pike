@@ -41,7 +41,14 @@ namespace G00D1DEA.Piker
 
 			try
 			{
-				numKey = uint.Parse(key);
+				if (key.StartsWith("0x"))
+				{
+					numKey = Convert.ToUInt32(key, 16);
+				}
+				else
+				{
+					numKey = uint.Parse(key);
+				}
 			}
 			catch (Exception e)
 			{
@@ -59,10 +66,10 @@ namespace G00D1DEA.Piker
 
 		
 			byte[] inputBytes = null;
-			if (Console.IsInputRedirected)
+			byte[] buf = new byte[4096];
+			if (Console.IsInputRedirected || string.IsNullOrEmpty(inputFilename))
 			{
 				var m = new MemoryStream();
-				byte[] buf = new byte[4096];
 				var s = Console.OpenStandardInput();
 				while (true)
 				{
@@ -80,12 +87,6 @@ namespace G00D1DEA.Piker
 			}
 			else
 			{
-				if (string.IsNullOrEmpty(inputFilename))
-				{
-					Console.Error.WriteLine("missing input filename.");
-					p.WriteOptionDescriptions(Console.Error);
-					Environment.Exit(1);
-				}
 				try
 				{
 					inputBytes = File.ReadAllBytes(inputFilename);
@@ -103,19 +104,13 @@ namespace G00D1DEA.Piker
 			pike.Codec(ref inputBytes);
 
 
-			if (Console.IsOutputRedirected)
+			if (Console.IsOutputRedirected || string.IsNullOrEmpty(outputFilename))
 			{
 				var s = Console.OpenStandardOutput();
 				s.Write(inputBytes, 0, inputBytes.Length);
 			}
 			else
 			{
-				if (string.IsNullOrEmpty(outputFilename))
-				{
-					Console.Error.WriteLine("missing output filename.");
-					p.WriteOptionDescriptions(Console.Error);
-					Environment.Exit(1);
-				}
 				File.WriteAllBytes(outputFilename, inputBytes);
 			}
 		}

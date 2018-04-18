@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace G00D1DEA.Pike
+﻿namespace G00D1DEA.Pike
 {
 	public class Pike
 	{
