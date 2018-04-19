@@ -67,7 +67,7 @@ namespace G00D1DEA.Piker
 		
 			byte[] inputBytes = null;
 			byte[] buf = new byte[4096];
-			if (Console.IsInputRedirected || string.IsNullOrEmpty(inputFilename))
+			if (string.IsNullOrEmpty(inputFilename))
 			{
 				var m = new MemoryStream();
 				var s = Console.OpenStandardInput();
@@ -104,7 +104,7 @@ namespace G00D1DEA.Piker
 			pike.Codec(ref inputBytes);
 
 
-			if (Console.IsOutputRedirected || string.IsNullOrEmpty(outputFilename))
+			if (string.IsNullOrEmpty(outputFilename))
 			{
 				var s = Console.OpenStandardOutput();
 				s.Write(inputBytes, 0, inputBytes.Length);
