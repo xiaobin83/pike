@@ -2,7 +2,7 @@
 using NDesk.Options;
 using System.IO;
 
-namespace G00D1DEA.Piker
+namespace x600d1dea.pike
 {
 	class Program
 	{
@@ -100,7 +100,7 @@ namespace G00D1DEA.Piker
 			}
 
 
-			var pike = new Pike.Pike(numKey);
+			var pike = new Pike(numKey);
 			pike.Codec(ref inputBytes);
 
 

@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace G00D1DEA.Pike
+namespace x600d1dea.pike
 {
 	public class DH
 	{
